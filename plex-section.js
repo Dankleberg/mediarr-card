@@ -6,6 +6,24 @@ export class PlexSection extends BaseSection {
     super('plex', 'Plex Recently Added');
   }
 
+  generateTemplate(config) {
+    // Get label from config or use default
+    const label = config?.plex_label ?? 'Recently Added';
+    return `
+      <div class="section" data-section="${this.key}">
+        <div class="section-header">
+          <div class="section-header-content">
+            <ha-icon class="section-toggle-icon" icon="mdi:chevron-down"></ha-icon>
+            <div class="section-label">${label}</div>
+          </div>
+        </div>
+        <div class="section-content">
+          <div class="${this.key}-list"></div>
+        </div>
+      </div>
+    `;
+  }
+
   updateInfo(cardInstance, item) {
     super.updateInfo(cardInstance, item);  // Handle backgrounds
     
